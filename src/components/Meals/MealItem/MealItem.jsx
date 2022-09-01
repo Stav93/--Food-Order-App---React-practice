@@ -15,7 +15,7 @@ function MealItem({ name, description, price, id }) {
         <span className={classes.price}>{price2}</span>
       </div>
       <div>
-        <MealItemForm/>
+        <MealItemForm id={id} />
       </div>
     </li>
   );

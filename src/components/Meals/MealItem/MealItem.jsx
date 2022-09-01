@@ -1,13 +1,13 @@
 import React from "react";
 import classes from "./MealItem.module.css";
 
-function MealItem({ meal }) {
-  const { name, description, price } = meal;
+function MealItem({ name, description, price, id }) {
+  // const { name, description, price } = meal;
 
   const price2 = `$${price.toFixed(2)}`;
 
   return (
-    <li className={classes.meal}>
+    <li className={classes.meal} key={id}>
       <div>
         <h3>{name}</h3>
         <p className={classes.description}>{description}</p>

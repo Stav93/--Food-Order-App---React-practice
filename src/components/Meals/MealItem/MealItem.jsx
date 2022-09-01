@@ -1,7 +1,8 @@
 import React from "react";
 import classes from "./MealItem.module.css";
 
-function MealItem({ name, description, price }) {
+function MealItem({ meal }) {
+  const { name, description, price } = meal;
 
   const price2 = `$${price.toFixed(2)}`;
 

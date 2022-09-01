@@ -1,4 +1,5 @@
 import React from "react";
+import MealItemForm from "./MealItemForm"
 import classes from "./MealItem.module.css";
 
 function MealItem({ name, description, price, id }) {
@@ -13,7 +14,9 @@ function MealItem({ name, description, price, id }) {
         <p className={classes.description}>{description}</p>
         <span className={classes.price}>{price2}</span>
       </div>
-      <div></div>
+      <div>
+        <MealItemForm/>
+      </div>
     </li>
   );
 }

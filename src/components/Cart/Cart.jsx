@@ -11,17 +11,24 @@ function Cart({ onCloseCart }) {
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
-  const removeItemHandler = (item) => {};
-  const addItemHandler = (item) => {};
+  const removeItemHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+  
+  const addItemHandler = (item) => {
+    cartCtx.addItem({...item, amount: 1});
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
         <CartItem
           key={item.id}
-          {...item}
-          onAdd={addItemHandler.bind(null, item.id)}
-          onRemove={removeItemHandler.bind(null, item)}
+          price={item.price}
+          name={item.name}
+          amount={item.amount}
+          onAdd={addItemHandler.bind(null, item)}
+          onRemove={removeItemHandler.bind(null, item.id)}
         />
       ))}
     </ul>
@@ -35,7 +42,6 @@ function Cart({ onCloseCart }) {
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={onCloseCart}>
-          {" "}
           Close
         </button>
         {hasItems && <button className={classes.button}>Order</button>}

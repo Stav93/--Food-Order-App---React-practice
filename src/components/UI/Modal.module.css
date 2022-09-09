@@ -11,8 +11,9 @@
 .modal {
   position: fixed;
   max-height: calc(100vh - 210px); 
-  overflow: scroll;
-  top: 20vh;
+  overflow: auto;
+  /* top: 20vh; */
+  top: 15vh;
   left: 5%;
   width: 90%;
   background-color: white;

@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import classes from "./CheckOut.module.css"
+import React, { useState } from "react";
+import classes from "./CheckOut.module.css";
 
 function CheckOut({ onCancel }) {
   const confirmHandler = (event) => {
     event.preventDefault();
-    console.log("checking out")
-  }
+    console.log("checking out");
+  };
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
       <div className={classes.control}>
@@ -24,10 +24,14 @@ function CheckOut({ onCancel }) {
         <label htmlFor="city">Youe city</label>
         <input type="text" id="city" />
       </div>
-      <button type="button" onClick={onCancel}>Cancle</button>
-      <button>Confirm</button>
+      <div className={classes.actions}>
+        <button type="button" onClick={onCancel}>
+          Cancle
+        </button>
+        <button className={classes.submit}>Confirm</button>
+      </div>
     </form>
-  )
+  );
 }
 
-export default CheckOut
+export default CheckOut;

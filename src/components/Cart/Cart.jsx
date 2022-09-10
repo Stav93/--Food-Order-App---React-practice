@@ -87,7 +87,16 @@ function Cart({ onCloseCart }) {
   );
 
   const isSubmitingContent = <p>Sending Order...</p>;
-  const didSubmitModalContent = <p>Successfully sent the order</p>;
+  const didSubmitModalContent = (
+    <>
+      <p>Successfully sent the order</p>;
+      <div className={classes.actions}>
+      <button className={classes.button} onClick={onCloseCart}>
+        Close
+      </button>
+    </div>
+    </>
+  );
 
   return (
     <Modal onCloseCart={onCloseCart}>

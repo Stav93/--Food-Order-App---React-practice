@@ -87,7 +87,7 @@ function Cart({ onCloseCart }) {
     </>
   );
 
-  const isSubmitingContent = <p>Sending Order...</p>;
+  const isSubmitingContent = <p>Sending Order...</p>
   const didSubmitModalContent = (
     <>
       <p>Successfully sent the order</p>;

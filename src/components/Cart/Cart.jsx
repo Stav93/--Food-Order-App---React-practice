@@ -42,6 +42,7 @@ function Cart({ onCloseCart }) {
     // should add an error case
     setSubmiting(false);
     setDidSubmit(true);
+    cartCtx.clearCart();
   };
 
   const cartItems = (

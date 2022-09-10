@@ -8,9 +8,11 @@ import classes from "./Cart.module.css";
 
 function Cart({ onCloseCart }) {
   const [checkingOut, setChekingOut] = useState(false);
+  const [submiting, setSubmiting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const totalAmount = `${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
   const removeItemHandler = (id) => {
@@ -23,6 +25,23 @@ function Cart({ onCloseCart }) {
 
   const orderHandler = () => {
     setChekingOut(true);
+  };
+
+  const submitOrderHandler = async (userData) => {
+    setSubmiting(true);
+    await fetch(
+      "https://react---http-c0d5a-default-rtdb.firebaseio.com/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          user: userData,
+          orderedItems: cartCtx.items,
+        }),
+      }
+    );
+    // should add an error case
+    setSubmiting(false);
+    setDidSubmit(true);
   };
 
   const cartItems = (
@@ -40,7 +59,7 @@ function Cart({ onCloseCart }) {
     </ul>
   );
 
-  const cartActions = 
+  const cartActions = (
     <div className={classes.actions}>
       <button className={classes["button--alt"]} onClick={onCloseCart}>
         Close
@@ -51,17 +70,30 @@ function Cart({ onCloseCart }) {
         </button>
       )}
     </div>
-  ;
+  );
 
-  return (
-    <Modal onCloseCart={onCloseCart}>
+  const cartModalContent = (
+    <>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {checkingOut && <CheckOut onCancel={onCloseCart} />}
+      {checkingOut && (
+        <CheckOut onCancel={onCloseCart} onConfirm={submitOrderHandler} />
+      )}
       {!checkingOut && cartActions}
+    </>
+  );
+
+  const isSubmitingContent = <p>Sending Order...</p>;
+  const didSubmitModalContent = <p>Successfully sent the order</p>;
+
+  return (
+    <Modal onCloseCart={onCloseCart}>
+      {!submiting && !didSubmit && cartModalContent}
+      {submiting && isSubmitingContent}
+      {!submiting && didSubmit && didSubmitModalContent}
     </Modal>
   );
 }

@@ -4,7 +4,7 @@ import classes from "./CheckOut.module.css";
 const isEmty = (value) => value.trim() === "";
 const wrongCode = (value) => value.trim().length !== 5;
 
-function CheckOut({ onCancel }) {
+function CheckOut({ onCancel, onConfirm }) {
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,
     street: true,
@@ -47,7 +47,12 @@ function CheckOut({ onCancel }) {
       return;
     }
 
-    // Submit
+    onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postal: enteredPostal,
+    })
   };
 
   const { name, street, city, postal } = formInputsValidity;
